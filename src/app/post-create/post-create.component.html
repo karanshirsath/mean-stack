@@ -2,18 +2,18 @@
   <form [formGroup]="userForm">
     <mat-form-field appearance="fill">
       <mat-label>First Name</mat-label>
-      <input matInput  formControlName="firstName">
+      <input matInput  formControlName="firstName" [(ngModel)]="formData.firstName">
       <mat-error *ngIf="userForm.controls.firstName.errors?.required && userForm.controls.firstName.touched">Required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Last Name</mat-label>
-      <input matInput  formControlName="lastName">
+      <input matInput  formControlName="lastName" [(ngModel)]="formData.lastName">
       <mat-error *ngIf="userForm.controls.lastName.errors?.required && userForm.controls.lastName.touched">Required</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Gender</mat-label>
-      <mat-select formControlName="gender">
+      <mat-select formControlName="gender" [(ngModel)]="formData.gender">
         <mat-option value="male">Male</mat-option>
         <mat-option value="female">Female</mat-option>
       </mat-select>
@@ -21,11 +21,12 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <textarea matInput formControlName="description"></textarea>
+      <textarea matInput formControlName="description" [(ngModel)]="formData.description"></textarea>
       <mat-error *ngIf="userForm.controls.description.errors?.required && userForm.controls.description.touched">Required</mat-error>
     </mat-form-field>
 
-      <button mat-raised-button color="accent" [disabled]="userForm.invalid" (click)="savePost()">Save Post</button>
+      <button *ngIf="!updateFlag" mat-raised-button color="accent" [disabled]="userForm.invalid" (click)="savePost()">Save Post</button>
+      <button *ngIf="updateFlag" mat-raised-button color="accent" [disabled]="userForm.invalid" (click)="updatePost()">Update Post</button>
 
   </form>
 

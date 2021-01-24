@@ -10,11 +10,20 @@ import { User } from './post.model';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-
+formData: any = {firstName:"",lastName:"",gender:"",description:""}
+updateFlag = false
+id = ""
   constructor( private userService:UserService) { }
   // @Output () sendData = new EventEmitter();
-  ngOnInit(): void {
+  ngOnInit(){
+this.userService.editUserUpdatedListener().subscribe((res)=>{
+ this.formData = res
+ this.updateFlag = true
+ console.log(res);
+ this.id=res._id
 
+
+})
   }
   userForm = new FormGroup({
     firstName: new FormControl('',[Validators.required]),
@@ -27,6 +36,15 @@ export class PostCreateComponent implements OnInit {
     this.userService.createUser(userData)
     this.userForm.reset()
 // this.sendData.emit(this.userForm.value)
+}
+updatePost(){
+  let formEdited = this.userForm.value
+  formEdited["_id"]=this.id
+  console.log(formEdited);
+  this.updateFlag =false
+  this.userService.updateUser(this.id,formEdited)
+  this.userForm.reset()
+
 }
 
 

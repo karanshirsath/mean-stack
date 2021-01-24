@@ -12,10 +12,10 @@ export class PostListComponent implements OnInit,OnChanges,OnDestroy {
 
   constructor(private userService:UserService) { }
   dataArray:User[] =[]
-  private userSub: Subscription = new Subscription;
+   userSub: Subscription = new Subscription;
   // @Input() dataReceiver :any
   ngOnInit(){
-    // this.dataArray=this.userService.getUsers();
+  this.userService.getUsers()
    this.userSub = this.userService.getUsersUpdatedListener().subscribe((users:User[])=>{
  this.dataArray =users
     })
@@ -27,6 +27,16 @@ export class PostListComponent implements OnInit,OnChanges,OnDestroy {
   }
   ngOnDestroy(){
     this.userSub.unsubscribe()
+  }
+  deleteUser(user:any){
+console.log("user to delete",user._id);
+this.userService.deleteUser(user._id)
+
+  }
+  editUser(user:User){
+this.userService.editUser(user)
+
+
   }
 
 
