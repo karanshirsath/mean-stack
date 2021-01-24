@@ -1,1 +1,32 @@
-<p>post-create works!</p>
+<mat-card>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput  formControlName="firstName">
+      <mat-error *ngIf="userForm.controls.firstName.errors?.required && userForm.controls.firstName.touched">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput  formControlName="lastName">
+      <mat-error *ngIf="userForm.controls.lastName.errors?.required && userForm.controls.lastName.touched">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+      </mat-select>
+      <mat-error *ngIf="userForm.controls.gender.errors?.required && userForm.controls.gender.touched">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      <mat-error *ngIf="userForm.controls.description.errors?.required && userForm.controls.description.touched">Required</mat-error>
+    </mat-form-field>
+
+      <button mat-raised-button color="accent" [disabled]="userForm.invalid" (click)="savePost()">Save Post</button>
+
+  </form>
+
+</mat-card>

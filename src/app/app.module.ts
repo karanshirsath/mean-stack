@@ -9,11 +9,22 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { PostCreateComponent } from './post-create/post-create.component';
+import {MatCardModule} from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { PostListComponent } from './post-list/post-list.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostCreateComponent
+    PostCreateComponent,
+    HeaderComponent,
+    HomeComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,
@@ -22,9 +33,14 @@ import { PostCreateComponent } from './post-create/post-create.component';
     MatInputModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
